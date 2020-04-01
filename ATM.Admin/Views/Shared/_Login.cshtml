@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ATM.Admin</title>
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body>
+    <div id="wrapper">
+        @RenderBody()
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2019 - ATM.Admin
+            </div>
+        </footer>
+    </div>
+    @RenderSection("Scripts", required: false)
+    <script src="~/js/login.min.js" asp-append-version="true"></script>
+</body>
+</html>

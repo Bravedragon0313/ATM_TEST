@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Get device list";
+}
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <main role="main" class="pb-3">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">DeviceId</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Paired</th>
+                                <th scope="col">Display</th>
+                                <th scope="col">pair/unpair</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var device in ViewBag.DevicesList.Results)
+                            {
+                                <tr>
+                                    <td>@device.DeviceId</td>
+                                    <td>@device.Name</td>
+                                    <td>@device.Paired</td>
+                                    <td>@device.Display</td>
+                                    <td>
+                                        <input type="checkbox" checked="@(@device.Paired == 1)" id="@device.DeviceId" onclick="pairMachine(@device.DeviceId);">
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+        </div>
+    </div>
+    <div class="dataTables_paginate paging_full_numbers" id="log_filter_paginate" style="display: flex;">
+        @if (ViewBag.DevicesList.RowCount % 10 == 0)
+        {
+            @for (int i = 1; i <= ViewBag.DevicesList.RowCount / 10; i++)
+            {
+                <a value="@i" class="btn btn-light" onclick="devicePagination(@i)">@i</a>
+
+            }
+        }
+        @if (ViewBag.DevicesList.RowCount % 10 != 0)
+        {
+            @for (int i = 1; i <= ViewBag.DevicesList.RowCount / 10 + 1; i++)
+            {
+                <a value="@i" class="btn btn-light" onclick="devicePagination(@i)">@i</a>
+
+            }
+        }
+        <p class="page">@ViewBag.area page</p>
+    </div>
+
+</div>
+
+<script>
+    function devicePagination(page) {
+        window.location.href = "/Device/GetDevice?page=" + page;
+    }
+
+    function pairMachine(machineId) {
+
+        var isChecked = document.getElementById(machineId).checked;
+
+
+        ajax.getData('/Device/PairDevice',
+            {
+                deviceId: machineId,
+                isPaired: !isChecked
+            },
+            function (responseData) {
+                if (responseData.responseJson.isError === false) {
+                    alert("Success");
+                } else {
+                    alert("Something went wrong");
+                }
+            }
+        );
+    }
+</script>
+
+

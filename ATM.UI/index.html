@@ -1,0 +1,1518 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AU Pay</title>
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="atm_ui">
+    <div id="debug-helpers" class="viewport">
+        <a href="javascript:ATM.switchFixedSize();">Fixed size</a>
+        <div class="debug-pages">
+        </div>
+    </div>
+    <section id="logo-page" class="logo_state ImPage viewport">
+        <script>
+            function goTolanguage() {
+                ATM.showPage('#languages-page');
+                localStorage.clear();
+                window.parent.caches.delete("call");
+                localStorage.clear();
+            }
+        </script>
+        <div class="w3-center w3-display-middle">
+            <img src="./images/logo_big.png" class="logo-image" onclick="goTolanguage();" />
+        </div>
+    </section>
+    <section id="languages-page" class="ImPage viewport">
+        <script>
+            function switchLanguage(l) {
+                ATM.setLanguage(l);
+                ATM.showPage("#scanqrcode-page");
+            }
+        </script>
+        <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo" /> </div>
+        <div class="w3-center w3-display-middle contentwidth">
+            <div>
+                <h2>Zvolte si jazyk prosím:</h2>
+                <h2>Please select a language:</h2>
+                <h2>Bitte wählen Sie eine Sprache:</h2>
+            </div>
+            <div class="topmargin">
+                <div class="language-div">
+                    <a class="language-button w3-button w3-hover-red leftposition" onclick="switchLanguage('cz')">
+                        <div class="lang-div">
+                            <h3 class="lngleft ImTranslated btn_selectlanguage_czech"></h3>
+                            <img src="./images/flags/czech-republic-flag-3d-icon-256.png" class="imgright" />
+                        </div>
+                    </a>
+                    <a class="language-button w3-button w3-mobile w3-hover-red rightposition">
+                        <div class="lang-div">
+                            <img src="./images/flags/france-flag-3d-icon-256.png" class="imgleft" />
+                            <h3 class="lngright ImTranslated btn_selectlanguage_french"></h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="language-div">
+                    <a class="language-button w3-button w3-mobile w3-hover-red leftposition"
+                        onclick="switchLanguage('en')">
+                        <div class="lang-div">
+                            <h3 class="leftposition btn_selectlanguage_english"></h3>
+                            <img src="./images/flags/united-kingdom-flag-3d-icon-256.png" class="imgright english" />
+                        </div>
+                    </a>
+                    <a class="language-button w3-button w3-mobile w3-hover-red rightposition">
+                        <div class="lang-div">
+                            <img src="./images/flags/hungary-flag-3d-icon-256.png" class="imgleft" />
+                            <h3 class="rightposition btn_selectlanguage_magyar"></h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="language-div">
+                    <a class="language-button w3-button w3-mobile w3-hover-red leftposition">
+                        <div class="lang-div">
+                            <h3 class="leftposition btn_selectlanguage_deutch"></h3>
+                            <img class="imgright" src="./images/flags/germany-flag-3d-icon-256.png" />
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section id="scanqrcode-page" class="ImPage viewport">
+        <script>
+            function QrScan() {
+                if (ATM.qrreader) {
+                    ATM.showPage('#banknotes-page');
+                }
+                else {
+                    ATM.showBlock('.block_qrscan_error2')
+                }
+
+            }
+        </script>
+        <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo" /> </div>
+        <div class="w3-center w3-display-middle contentwidth">
+            <div>
+                <h2 class="header_scanqrcode_welcome"></h2>
+                <h2 class="header_scanqrcode_QRscan"></h2>
+            </div>
+            <div>
+                <div class="topmargin qrimg" onclick="QrScan()">
+                    <img src="./images/QR code.png" class="contwidth">
+                </div>
+            </div>
+            <div class="background-red ImBlockMessage block_qrscan_error">
+                <h2 class="error_scanqrcode_error"></h2>
+                <h2 class="error_scanqrcode_again"></h2>
+            </div>
+            <div class="ImBlockMessage block_qrscan_error2">
+                <h2 class="error_scanqrcode_error2 errcolor"></h2>
+                <h2 class="error_scanqrcode_again2 errcolor"></h2>
+            </div>
+        </div>
+    </section>
+    <section id="home-page" class="ImPage viewport">
+        <script>
+            function doQrScan() {
+                ATM.showPage('#smsvalidation-page');
+            }
+        </script>
+        <section class="touch">
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo" /> </div>
+            <div class="w3-center w3-display-middle contentwidth">
+                <div>
+                    <h2 class="header_home_welcome"></h2>
+                    <h2 class="header_home_qrscan"></h2>
+                </div>
+                <div>
+                    <div class="topmargin"> <img src="./images/QR code.png" class="fullwidth" /> </div>
+                </div>
+            </div>
+        </section>
+        <section class="black-background">
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo" /> </div>
+            <div class="w3-center w3-display-middle top_margin">
+                <h2 class="text_home_continue continuetouch" onclick="doQrScan();"></h2>
+            </div>
+        </section>
+    </section>
+    <section id="smsvalidation-page" class="ImPage viewport">
+        <script>
+            function doSmsVerification() {
+                if (ATM.smscode_status && document.querySelector('#DisplayResult').value != "") {
+                    if (localStorage.getItem("menu_key") == 'deposit-aupay') {
+                        ATM.showPage('#print-page');
+                    }
+                    switch (localStorage.getItem("menu_key")) {
+                        case 'withdraw':
+                            ATM.showPage('#print-page');
+                            break;
+                        case 'deposit':
+                            ATM.showPage('#InsertBanknotes-page');
+                            break;
+                        case 'aupay':
+                            ATM.showPage('#print-page');
+                            break;
+                    }
+                    setTimeout(() => {
+                        document.querySelector('#DisplayResult').value = ""
+                    }, 500);
+                }
+                else {
+                    ATM.showBlock('.block_smsvalidation_error');
+                    document.querySelector('#DisplayResult').classList.add('uniqueclass');
+                }
+            }
+        </script>
+        <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo" /> </div>
+        <div class="w3-center w3-display-middle ctwidth">
+            <div>
+                <h2 class="description_smsvalidation_smstodevice"></h2>
+            </div>
+            <div class="topmargin">
+                <form name="form">
+                    <div class="w3-row-padding">
+                        <div class="w3-col m1">
+                            <h2>&nbsp;</h2>
+                        </div>
+                        <div class="w3-col m5 ">
+                            <div class="bottommargin">
+                                <input type="text" class="calculateb-input"
+                                    placeholder="&#9679;&nbsp;&nbsp;&#9679;&nbsp;&nbsp;&#9679;&nbsp;&nbsp;&#9679;"
+                                    id="DisplayResult" maxlength="4" />
+                            </div>
+                            <div class="none_block_smspage block">
+                                <h2 class="description_smsvalidation_enter"></h2>
+                                <h2 class="description_smsvalidation_authentication"></h2>
+                            </div>
+                            <div class="ImBlockMessage block_smsvalidation_error">
+                                <h2 class="error_smsvalidation_red redcolor"></h2>
+                                <h2 class="error_smsvalidation_again redcolor"></h2>
+                                <h2 class="error_smsvalidation_enter redcolor"></h2>
+                            </div>
+                        </div>
+                        <div class="w3-col m5">
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b7" value="1" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b8" value="2" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b9" value="3" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="b10" value="Cancel" onclick="ATM.logout()">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b4" value="4" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b5" value="5" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b6" value="6" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="subb" value="Clear"
+                                    onclick="document.getElementById('DisplayResult').value = ''">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b1" value="7" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b2" value="8" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b3" value="9" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover enter"
+                                    name="mulb" value="Enter" onclick="doSmsVerification();">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="potb" value="0" onClick="calcNumbers(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="divb" value="" onClick="calcNumbers(divb.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    value="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section id="banknotes-page" class="ImPage viewport">
+        <script>
+            function operationSwitch(menu) {
+                console.log(menu);
+                localStorage.setItem('menu_key', menu);
+                window.parent.caches.delete("call");
+                switch (menu) {
+                    case 'withdraw':
+                        ATM.showPage('#confirmamount-page');
+                        break;
+                    case 'deposit':
+                        ATM.showPage('#depositamount-page');
+                        break;
+                    case 'aupay':
+                        ATM.showPage("#DepositeQR-page");
+                        document.getElementById('confreceip_head').style.display = 'none'
+                        break;
+                }
+                return false;
+            }
+        </script>
+        <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo" /> </div>
+        <div class="w3-center w3-display-middle">
+            <div class="topmargin">
+                <div>
+                    <a class="drawal-button w3-button w3-mobile withdrawal-hover rightmargin"
+                        onclick="operationSwitch('withdraw')">
+                        <div>
+                            <h2 class="btn_banknotes_withdrawal inserttext"></h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="drawal">
+                    <a class="drawal-button w3-button w3-mobile withdrawal-hover rightmargin"
+                        onclick="operationSwitch('deposit')">
+                        <div>
+                            <h2 class="btn_banknotes_deposit inserttext"></h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="drawal">
+                    <a class="drawal-button w3-button w3-mobile withdrawal-hover rightmargin"
+                        onclick="operationSwitch('aupay')">
+                        <div class="aupay">
+                            <h2 class="btn_banknotes_aupay inserttext"></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="margintop">
+                <h2 class="description_banknotes_insert"></h2>
+            </div>
+        </div>
+    </section>
+    <section id="continue-page" class="ImPage viewport">
+        <script>
+            function goToBanknotes() {
+                ATM.showPage('#banknotes-page');
+            }
+        </script>
+
+        <div class="w3-center w3-display-middle">
+            <div class="margintop">
+                <h2 class="head_continue_continue"></h2>
+            </div>
+            <div>
+                <div class="margintop16 yesno">
+                    <a onclick="ATM.logout();" class="kc-button w3-button w3-mobile withdrawal-hover continue-button">
+                        <div>
+                            <h2 class="btn_continue_no"></h2>
+                        </div>
+                    </a>
+                    <a onclick="goToBanknotes();"
+                        class="kc-nbutton w3-button w3-mobile withdrawal-hover continue-button">
+                        <div>
+                            <h2 class="btn_continue_yes"></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="margintop16">
+                <h2></h2>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_continue_close"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="confirmamount-page" class="ImPage viewport">
+        <script>
+            function goToOperations() {
+                ATM.showPage('#banknotes-page');
+            }
+
+            function confirmamount(value) {
+                if (ATM.transaction_cancel) {
+                    ATM.showPage('#transactioncancel-page');
+                }
+                else {
+                    ATM.showPage('#smsvalidation-page');
+                }
+            }
+            function goTowithdrawamount() {
+                ATM.showPage('#withdrawamount-page')
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle" onclick="goToOperations();">
+                    <img src="./images/triangle.png" class="centerposition" />
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo" /> </div>
+        </div>
+        <div class="w3-center w3-display-middle kc">
+            <div>
+                <div class="topmargin">
+                    <a class="confirm-button w3-button w3-mobile withdrawal-hover rightmargin" value="500"
+                        onclick="confirmamount(this.value);">
+                        <h3 class="kc-text">
+                            500
+                            Kč
+                        </h3>
+                    </a>
+                    <a class="confirm-button w3-button w3-mobile withdrawal-hover" value="1000"
+                        onclick="confirmamount(this.value);">
+                        <h3 class="kc-text">
+                            1000
+                            Kč
+                        </h3>
+                    </a>
+                </div>
+                <div class="tb-margin">
+                    <a class="confirm-button w3-button w3-mobile withdrawal-hover rightmargin" value="1500"
+                        onclick="confirmamount(this.value);">
+                        <h3 class="kc-text">
+                            1500
+                            Kč
+                        </h3>
+                    </a>
+                    <a class="confirm-button w3-button w3-mobile withdrawal-hover" value="2000"
+                        onclick="confirmamount(this.value);">
+                        <h3 class="kc-text">
+                            2000
+                            Kč
+                        </h3>
+                    </a>
+                </div>
+                <div class="tb-margin">
+                    <a class="confirm-button w3-button w3-mobile withdrawal-hover rightmargin" value="5000"
+                        onclick="confirmamount(this.value);">
+                        <h3 class="kc-text">
+                            5000
+                            Kč
+                        </h3>
+                    </a>
+                    <a class="confirm-button w3-button w3-mobile withdrawal-hover" onclick="goTowithdrawamount();">
+                        <h4 class="btn_confirmamount_another kc-text1"></h4>
+                        <h4 class="btn_confirmamount_sum kc-text1"></h4>
+                    </a>
+                </div>
+            </div>
+            <div class="margintop">
+                <h2 class="description_confirmamount_banknotes kc-description"></h2>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_confirmamount_closing"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="print-page" class="ImPage viewport">
+        <script>
+            function backfromprint() {
+                if (localStorage.getItem("menu_key") == "deposit") {
+                    ATM.showPage('#deposit-page');
+                }
+                else {
+                    ATM.showPage('#smsvalidation-page');
+                }
+            }
+            function goToAmount() {
+                ATM.showPage('#confirmamount-page');
+            }
+
+            function goToprint() {
+                ATM.showPage("#print-page");
+            }
+            function no_print() {
+
+                if (localStorage.getItem("menu_key") == "withdraw") {
+                    ATM.showPage('#removecash-page');
+                }
+                else {
+                    ATM.showPage('#continue-page');
+                }
+
+            }
+            function yes_print() {
+                if (ATM.printing_status) {
+                    ATM.print();
+                    if (localStorage.getItem("menu_key") == "withdraw") {
+                        ATM.showPage('#removecash-page');
+                    }
+                    else {
+                        ATM.showPage('#continue-page');
+                    }
+                }
+                else {
+                    if (localStorage.getItem("menu_key") == "withdraw") {
+                        ATM.showPage('#removecash-page');
+                    }
+                    else {
+                        ATM.showPage('#continue-page');
+                    }
+                }
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle" onclick="backfromprint();">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle">
+            <div class="margintop">
+                <h2 class="head_print_certification"></h2>
+            </div>
+            <div>
+                <div class="margintop16 yesno">
+                    <a onclick="no_print()" class="kc-button w3-button w3-mobile withdrawal-hover">
+                        <div>
+                            <h2 class="btn_print_no confirm-transaction"></h2>
+                        </div>
+                    </a>
+                    <a onclick="yes_print()" class="kc-nbutton w3-button w3-mobile withdrawal-hover">
+                        <div>
+                            <h2 class="btn_print_yes confirm-transaction"></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_print_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="removecash-page" class="ImPage viewport">
+        <script>
+            function removeBanknotes() {
+                if (ATM.transaction_cancel) {
+                    ATM.showPage('#transactioncancel-page');
+                }
+                else {
+                    ATM.showPage('#continue-page');
+                }
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle"
+                    onclick="ATM.showPage('#print-page');">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle">
+            <div>
+                <div class="w3-row-padding" onclick="removeBanknotes()">
+                    <div class="w3-col m6"> <img src="./images/cash_machine (1).png" class="fullwidth cash1"> </div>
+                    <div class="w3-col m6">
+                        <h2 class="description_removecash_take margintop25"></h2>
+                        <h2 class="description_removecash_giveout margintop50"></h2>
+                        <h2 class="description_removecash_banknotes"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_removecash_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="usingservice-page" class="ImPage viewport">
+        <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        <div class="w3-center w3-display-middle">
+            <div class="margintop">
+                <h2 class="header_usingservice_thanksforuse"></h2>
+            </div>
+            <div>
+                <div class="margintop16">
+                    <a class="usingservice-button w3-button w3-mobile withdrawal-hover">
+                        <div>
+                            <h2 class="btn_usingservice_logout confirm-transaction"></h2>
+                        </div>
+                    </a>
+                    <a class="usingservice-button w3-button w3-mobile withdrawal-hover">
+                        <div class="service">
+                            <h2 class="btn_usingservice_continue confirm-transaction"></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="transactioncancel-page" class="ImPage viewport">
+        <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        <div class="w3-center w3-display-middle">
+            <h2 class="description_transactioncancel_cancel trcancel" onclick="ATM.showPage('#banknotes-page');"></h2>
+        </div>
+    </section>
+
+    <section id="withdrawamount-page" class="ImPage viewport">
+        <script>
+
+            function withdraw(value) {
+                if (ATM.transaction_cancel) {
+                    ATM.showPage('#transactioncancel-page');
+                }
+                else {
+                    if (value % 500 != 0 && value != "") {
+                        ATM.showBlock('.block_withdrawamount_error');
+                        return false;
+                    }
+                    if (value > 5000) {
+
+                        ATM.showBlock('.block_withdrawamount_toohigherr');
+                        return false;
+                    }
+                    if (value > ATM.cashamount) {
+
+                        ATM.showBlock('.block_withdrawamount_notenougherr');
+                        return false;
+                    }
+                    else {
+                        ATM.showPage('#smsvalidation-page');
+                    }
+
+                }
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle">
+                    <img src="images/triangle.png" class="centerposition" onclick="ATM.showPage('#banknotes-page')">
+                </a>
+            </div>
+            <div class="rightposition">
+                <img src="./images/logo_small.png" class="small_logo" onclick="ATM.showPage('#banknotes-page');">
+            </div>
+        </div>
+        <div class="w3-center w3-display-middle ctwidth">
+            <div>
+                <h2 class="description_withdrawamount_write500"></h2>
+            </div>
+            <div class="topmargin">
+                <form name="form">
+                    <div class="w3-row-padding">
+                        <div class="w3-col m1">
+                            <h2>&nbsp;</h2>
+                        </div>
+                        <div class="w3-col m5">
+                            <div class="placeholder" data-placeholder="CZK">
+                                <div class="bottommargin">
+                                    <input type="text" class="calculaten-input" placeholder="1050"
+                                        id="withdraw_sumamount" maxlength="4" value="" />
+                                </div>
+                            </div>
+                            <div class="ImBlockMessage block_withdrawamount_error">
+                                <h2 class="error_withdrawamount_error redcolor"></h2>
+                                <h2 class="error_withdrawamount_again redcolor"></h2>
+                            </div>
+                            <div class="ImBlockMessage block_withdrawamount_toohigherr">
+                                <h2 class="error_withdrawamount_toohigherr redcolor"></h2>
+                            </div>
+                            <div class="ImBlockMessage block_withdrawamount_notenougherr">
+                                <h2 class="error_withdrawamount_notenougherr redcolor"></h2>
+                            </div>
+                        </div>
+                        <div class="w3-col m5">
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b17" value="1" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b18" value="2" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b19" value="3" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="b110" value="Cancel" onclick="ATM.logout()">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b14" value="4" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b15" value="5" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b16" value="6" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="subb" value="Clear"
+                                    onclick="document.getElementById('withdraw_sumamount').value = ''">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b11" value="7" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b12" value="8" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b13" value="9" onClick="withdrawamount(this.value)">
+                                <input type="button"
+                                    class="calculate-mbutton w3-button w3-mobile calculate-hover enter2" name="mulb"
+                                    value="Enter"
+                                    onClick="withdraw(document.querySelector('#withdraw_sumamount').value)">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="potb" value="0" onClick="withdrawamount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_withdrawamount_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="banknote-page" class="ImPage viewport">
+        <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        <div class="w3-center w3-display-middle">
+            <div class="topmargin">
+                <div>
+                    <a class="drawal-button w3-button w3-mobile withdrawal-hover rightmargin">
+                        <div>
+                            <h2 class="btn_banknote_withdrawal inserttext"></h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="drawal">
+                    <a class="drawal-button w3-button w3-mobile withdrawal-hover rightmargin">
+                        <div>
+                            <h2 class="btn_banknote_deposit inserttext"></h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="drawal">
+                    <a class="drawal-button w3-button w3-mobile withdrawal-hover rightmargin">
+                        <div>
+                            <h2 class="btn_banknote_aupay inserttext aupay2"></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="margintop">
+                <h2 class="description_banknote_insert inserttext"></h2>
+            </div>
+        </div>
+    </section>
+    <section id="depositamount-page" class="ImPage viewport ">
+        <script>
+            function insert(value) {
+                if (ATM.transaction_cancel) {
+                    ATM.showPage('#transactioncancel-page');
+                }
+                else {
+                    if (value % 500 == 0) {
+                        ATM.showPage('#smsvalidation-page');
+                        localStorage.setItem("depositamount_key", value);
+                        document.getElementById('total_filed').value = localStorage.getItem("depositamount_key").toString();
+                        document.getElementById('confirmreceiptent_amount').value = localStorage.getItem("depositamount_key") + "Kč";
+                        document.getElementById('depositamount').value = localStorage.getItem("depositamount_key") + "Kč";
+                        console.log(localStorage.getItem("depositamount_key"));
+                    } else {
+
+                        ATM.showBlock('.block_depositamount_error');
+
+                    }
+                }
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle"
+                    onclick="ATM.showPage('#banknotes-page')">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle ctwidth">
+            <div>
+                <h2 class="header_depositamount_deposite"></h2>
+                <h4 class="header_depositamount_accept margintop4"></h4>
+                <h4 class="header_depositamount_amount"></h4>
+            </div>
+            <div class="topmargin">
+                <form name="form">
+                    <div class="w3-row-padding">
+                        <div class="w3-col m1">
+                            <h2>&nbsp;</h2>
+                        </div>
+                        <div class="w3-col m5">
+                            <div class="placeholder" data-placeholder="CZK">
+                                <div class="bottommargin">
+                                    <input type="text" class="calculaten-input" placeholder="1050"
+                                        id="deposit_sumamount" maxlength="4" value="" />
+                                </div>
+                            </div>
+                            <div class="ImBlockMessage block_depositamount_error">
+                                <h2 class="error_depositamount_wrongsum redcolor"></h2>
+                                <h2 class="error_depositamount_sumagain redcolor"></h2>
+                            </div>
+                        </div>
+                        <div class="w3-col m5">
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b17" value="1" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b18" value="2" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b19" value="3" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="b110" value="Cancel" onclick="ATM.logout()">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b14" value="4" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b15" value="5" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b16" value="6" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="subb" value="Clear"
+                                    onclick="document.getElementById('deposit_sumamount').value = ''">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b11" value="7" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b12" value="8" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b13" value="9" onClick="insertAmount(this.value)">
+                                <input type="button"
+                                    class="calculate-mbutton w3-button w3-mobile calculate-hover enter3" name="mulb"
+                                    value="Enter" onClick="insert(document.querySelector('#deposit_sumamount').value)">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="potb" value="0" onClick="insertAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_depositamount_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="transferamount-page" class="ImPage viewport ">
+        <script>
+            function transfer(value) {
+                if (ATM.transaction_cancel) {
+                    ATM.showPage('#transactioncancel-page');
+                }
+                else {
+                    if (value % 500 == 0 && document.querySelector('#transfer_sumamount').value != "") {
+                        ATM.showPage('#smsvalidation-page');
+                    } else {
+                        ATM.showBlock('.block_transferamount_error');
+                    }
+                }
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle"
+                    onclick="ATM.showPage('#confirmrecipitent-page');">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle ctwidth">
+            <div>
+                <h2 class="header_transferamount_deposite"></h2>
+                <h4 class="header_transferamount_accept margintop4"></h4>
+                <h4 class="header_transferamount_amount"></h4>
+            </div>
+            <div class="topmargin">
+                <form name="form">
+                    <div class="w3-row-padding">
+                        <div class="w3-col m1">
+                            <h2>&nbsp;</h2>
+                        </div>
+                        <div class="w3-col m5">
+                            <div class="placeholder" data-placeholder="CZK">
+                                <div class="bottommargin">
+                                    <input type="text" class="calculaten-input" placeholder="1050"
+                                        id="transfer_sumamount" maxlength="4" value="" />
+                                </div>
+                            </div>
+                            <div class="ImBlockMessage block_transferamount_error">
+                                <h2 class="error_transferamount_wrongsum redcolor"></h2>
+                                <h2 class="error_transferamount_sumagain redcolor"></h2>
+                            </div>
+                        </div>
+                        <div class="w3-col m5">
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b17" value="1" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b18" value="2" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b19" value="3" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="b110" value="Cancel" onclick="ATM.logout()">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b14" value="4" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b15" value="5" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b16" value="6" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover"
+                                    name="subb" value="Clear"
+                                    onclick="document.getElementById('transfer_sumamount').value = ''">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b11" value="7" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b12" value="8" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="b13" value="9" onClick="transferAmount(this.value)">
+                                <input type="button"
+                                    class="calculate-mbutton w3-button w3-mobile calculate-hover enter3" name="mulb"
+                                    value="Enter"
+                                    onClick="transfer(document.querySelector('#transfer_sumamount').value)">
+                            </div>
+                            <div>
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover"
+                                    name="potb" value="0" onClick="transferAmount(this.value)">
+                                <input type="button" class="calculate-button w3-button w3-mobile calculate-hover">
+                                <input type="button" class="calculate-mbutton w3-button w3-mobile calculate-hover">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_transferamount_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="Insertbanknotes-page" class="ImPage viewport">
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle ctwidth">
+            <div>
+                <h2 class="header_insertbanknotes_insert"></h2>
+                <h4 class="header_insertbanknotes_accept margintop4"></h4>
+                <h4 class="header_insertbanknotes_amount"></h4>
+            </div>
+            <div>
+                <div class="w3-row-padding margintop4">
+                    <div class="w3-col m1">
+                        <h2>&nbsp;</h2>
+                    </div>
+                    <div class="w3-col m5">
+                        <img src="./images/cash_machine.png" class="halfwidth">
+                        <h2 class="description_insertbanknotes_putin IB-tx"></h2>
+                        <h2 class="description_insertbanknotes_individually mediumfont"></h2>
+                    </div>
+                    <div class="w3-col m5">
+                        <div class="insertdiv">
+                            <label class="label_insertbanknotes_paid insertlabel"></label>
+                            <input type="text" class="IB-text1" placeholder="0 Kč" />
+                        </div>
+                        <div class="insertdiv">
+                            <label class="label_insertbanknotes_tobepaid insertlabel"></label>
+                            <input type="text" class="IB-text1" placeholder="0 Kč" />
+                        </div>
+                        <div class="insertdiv">
+                            <label class="label_insertbanknotes_sum insertlabel"></label>
+                            <input type="text" class="IB-text1" placeholder="0 Kč" />
+                        </div>
+                        <button type="submit" class="IB-button w3-button w3-mobile calculate-hover insertbank">
+                            <h3 class="btn_insertbanknotes_confirm smallfont"></h3>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_insertbanknotes_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="InsertBanknotes-page" class="ImPage viewport">
+        <script>
+            function insertBanknote() {
+                if (document.querySelector('#paid_filed').value == ""
+                    || document.querySelector('#remain_filed').value == ""
+                    || document.querySelector('#total_filed').value == "") {
+                    document.getElementById('required').style.display = 'initial';
+                } else {
+                    if (document.querySelector('#remain_filed').value == "0") {
+
+                        ATM.showPage('#deposit-page');
+                    }
+                    else {
+                        document.getElementById('required').style.display = 'none';
+                        document.getElementById('wronginsert').style.display = 'initial';
+                    }
+                }
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle"
+                    onclick="ATM.showPage('#depositamount-page');">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle ctwidth">
+            <div>
+                <h2 class="header_InsertBanknotes_insert"></h2>
+                <h4 class="header_InsertBanknotes_accept margintop4"></h4>
+                <h4 class="header_InsertBanknotes_amount"></h4>
+            </div>
+            <div>
+                <div class="w3-row-padding margintop4">
+                    <div class="w3-col m5">
+                        <div class="cash-img"> <img src="./images/cash_machine (2).png" class="insertbankwidth"> </div>
+                        <h2 class="description_InsertBanknotes_putin IB-tx putinbankmargintop">
+                        </h2>
+                        <h2 class="description_InsertBanknotes_individually" class="mediumfont">
+                        </h2>
+                    </div>
+                    <div class="w3-col m1">
+                        <h2>&nbsp;</h2>
+                    </div>
+                    <div class="w3-col m5">
+                        <div class="insertdiv">
+                            <label class="label_InsertBanknotes_paid insertlabel"> </label>
+                            <input type="text" id="paid_filed" class="InputBanknotes" placeholder="0 Kč" />
+                        </div>
+                        <div class="insertdiv">
+                            <label class="label_InsertBanknotes_tobepaid insertlabel"> </label>
+                            <input type="text" id="remain_filed" class="InputBanknotes" placeholder="0 Kč" />
+                        </div>
+                        <div class="insertdiv">
+                            <label class="label_InsertBanknotes_sum insertlabel"></label>
+                            <input type="text" id="total_filed" class="InputBanknotes" placeholder="0 Kč" value="" />
+                        </div>
+                        <button type="submit" class="IB-button w3-button w3-mobile calculate-hover insertbank2"
+                            onclick="insertBanknote()">
+                            <h3 class="btn_InsertBanknotes_confirm smallfont"></h3>
+                        </button>
+                        <p id="required" class="filed_required"></p>
+                        <p id="wronginsert" class="description_insertBanknotes_wrong nodisplay"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_InsertBanknotes_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="InsertBanknote-page" class="ImPage viewport">
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle ctwidth">
+            <div>
+                <h2 class="header_InsertBanknote_insert"></h2>
+                <h4 class="header_InsertBanknote_accept margintop4"></h4>
+                <h4 class="header_InsertBanknote_amount"></h4>
+            </div>
+            <div>
+                <div class="w3-row-padding margintop4">
+                    <div class="w3-col m1">
+                        <h2>&nbsp;</h2>
+                    </div>
+                    <div class="w3-col m5">
+                        <img src="./images/cash_machine.png" class="halfwidth">
+                        <h2 class="description_InsertBanknote_putin IB-tx"></h2>
+                        <h2 class="description_InsertBanknote_individually mediumfont"></h2>
+                    </div>
+                    <div class="w3-col m5">
+                        <div class="insertdiv">
+                            <label class="label_InsertBanknote_paid insertlabel"></label>
+                            <input type="text" class="IB-text1" placeholder="0 Kč" />
+                        </div>
+                        <div class="insertdiv">
+                            <label class="label_InsertBanknote_tobepaid insertlabel"></label>
+                            <input type="text" class="IB-text1" placeholder="0 Kč" />
+                        </div>
+                        <div class="insertdiv">
+                            <label class="label_InsertBanknote_sum insertlabel"></label>
+                            <input type="text" class="IB-text1" placeholder="0 Kč" />
+                        </div>
+                        <button type="submit" class="IB-button w3-button w3-mobile calculate-hover insertbank3">
+                            <h3 class="btn_InsertBanknote_confirm smallfont">
+                                Potvrdit
+                            </h3>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_InsertBanknote_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="deposit-page" class="ImPage viewport">
+        <script>
+            function aupay() {
+                localStorage.setItem("menu_key", "deposit-aupay");
+                ATM.showPage("#DepositeQR-page");
+                window.parent.caches.delete("call");
+                console.log("cash deleted");
+            }
+            function tomyaccount() {
+                goToprint();
+            }
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle"
+                    onclick="ATM.showPage('#InsertBanknotes-page');">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle">
+            <h2 class="header_deposit_amount"></h2>
+            <div class="deposite-div">
+                <input type="text" id="depositamount" class="deposite-button w3-button w3-mobile" readonly />
+            </div>
+            <div class="deposited_div deposite">
+                <button type="submit" onclick="aupay()" class="deposite2-button w3-button w3-mobile calculate-hover">
+                    <h3 class="btn_deposite_sendviaaupay largefont"></h3>
+                </button>
+                <button type="submit" onclick="tomyaccount()"
+                    class="deposite2-button w3-button w3-mobile calculate-hover">
+                    <h3 class="btn_deposite_tomyaccount largefont"></h3>
+                </button>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_deposite_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="DepositeQR-page" class="ImPage  viewport">
+        <script>
+            function aupayqrscan() {
+                if (ATM.qrreader) {
+                    ATM.showPage('#confirmrecipitent-page');
+                }
+                else {
+                    ATM.showBlock('.block_qrscan_error2')
+                }
+            }
+            function backfromreceiverqrscan() {
+                if (localStorage.getItem("menu_key") == 'aupay') {
+                    ATM.showPage('#banknotes-page');
+                }
+                else {
+                    ATM.showPage('#deposit-page');
+                }
+            }
+
+        </script>
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle" onclick="backfromreceiverqrscan()">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition">
+                <img src="./images/logo_small.png" class="small_logo">
+            </div>
+        </div>
+        <div class="w3-center w3-display-middle depositepadding">
+            <h2 class="header_DepositeQR_viaaupay"></h2>
+            <h2 class="header_DepositeQR_scan"></h2>
+            <div class="depositeqr"> <img src="./images/QR 2.png" width="100%" onclick="aupayqrscan()"> </div>
+            <div class="ImBlockMessage block_depositeqr_error">
+                <h2 class="error_DepositeQR_error errcolor"></h2>
+                <h2 class="error_DepositeQR_qragain errcolor"></h2>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_DepositeQR_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="confirmrecipitent-page" class="ImPage  viewport">
+        <div class="inline">
+            <div class="leftposition">
+                <a class="back-button w3-button w3-mobile calculate-hover triangle"
+                    onclick="ATM.showPage('#DepositeQR-page');">
+                    <img src="images/triangle.png" class="centerposition">
+                </a>
+            </div>
+            <div class="rightposition"> <img src="./images/logo_small.png" class="small_logo"> </div>
+        </div>
+        <div class="w3-center w3-display-middle depositepadding">
+            <h2 class="header_confirmrecipitent_amountdeposited" id="confreceip_head"></h2>
+            <div class="w3-container3 w3-center depositepadding">
+                <div>
+                    <input type="text" id="confirmreceiptent_amount" class="deposite-text" value="" readonly>
+                </div>
+                <h2 class="description_confirmrecipitent_recipient dp-text"></h2>
+                <div>
+                    <button type="submit" class="deposited-button w3-button w3-mobile withdrawal-hover">
+                        <h3 class="btn_confirmrecipitent_confirm" onclick="ATM.showPage('#transferamount-page');"></h3>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-button">
+            <a class="kc-mbutton w3-button w3-mobile withdrawal-hover" onclick="ATM.logout();">
+                <div>
+                    <h2 class="btn_confirmrecipitent_closing footer-text"></h2>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="system-connectethernet-page" class="viewport connect_ethernet_state ImPage"
+        data-tr-section="connect_ethernet" data-screentype="system-tp">
+        <div class="w3-center w3-display-middle depositepadding">
+            <header>
+                <img src="images/system/network-down.svg" />
+            </header>
+
+            <h2 class=" xs-margin-bottom header_connectethernet_networkdown nm-margin-top"></h2>
+            <p class="description_connectethernet_verify"></p>
+            <div class="contacts nm-margin-top">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="images/system/operator-amazonite.svg" />
+                            <span class="d2 operator-name"></span>
+                        </td>
+                        <td>
+                            <img src="images/system/phone-amazonite.svg" />
+                            <span class="d2 operator-phone"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="images/system/email-amazonite.svg" />
+                            <span class="d2 operator-email"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section id="system-bootingup-page" class="viewport booting_state ImPage system-color no-action-info"
+        data-tr-section="booting" data-screentype="system-tp">
+        <header>
+            <div class="sk-three-bounce">
+                <div class="sk-child sk-bounce1"></div>
+                <div class="sk-child sk-bounce2"></div>
+                <div class="sk-child sk-bounce3"></div>
+            </div>
+        </header>
+        <div class="w3-center w3-display-middle">
+            <h2 class=" header_bootingup_bootingup no-margin-bottom"></h2>
+            <p class=" description_bootingup_initialhardware d1"></p>
+            <p class=" description_bootingup_moment d1 no-margin-top"><strong></strong></p>
+        </div>
+    </section>
+    <section id="system-initializing-page" class="viewport initializing_state ImPage no-action-info system-color"
+        data-tr-section="initializing" data-screentype="system-tp">
+        <header>
+            <div class="sk-three-bounce">
+                <div class="sk-child sk-bounce1"></div>
+                <div class="sk-child sk-bounce2"></div>
+                <div class="sk-child sk-bounce3"></div>
+            </div>
+        </header>
+        <div class="w3-center w3-display-middle">
+            <h2 class=" header_initializing_initializing no-margin-bottom"></h2>
+            <p class=" description_initializing_cryptographicidentity d1"></p>
+            <p class=" description_initializing_wait d1 no-margin-top">
+                <strong></strong>
+            </p>
+        </div>
+    </section>
+    <section id="system-connecting-page" class="viewport connecting_state ImPage no-action-info system-color"
+        data-tr-section="connecting" data-screentype="system-tp">
+        <header>
+        </header>
+        <div class="w3-center w3-display-middle">
+            <h2 class=" head_connecting_connecting"></h2>
+        </div>
+    </section>
+    <section id="system-pairing-page" class="viewport pairing_state ImPage no-action-info system-color"
+        data-tr-section="pairing" data-screentype="system-tp">
+        <header>
+            <div class="sk-three-bounce">
+                <div class="sk-child sk-bounce1"></div>
+                <div class="sk-child sk-bounce2"></div>
+                <div class="sk-child sk-bounce3"></div>
+            </div>
+        </header>
+        <div class="w3-center w3-display-middle">
+            <h2 class=" head_pairing_pairing"></h2>
+        </div>
+    </section>
+    <section id="system-unpaired-page" class="viewport unpaired_state ImPage info system-color"
+        data-tr-section="unpaired" data-screentype="system-tp">
+        <script>
+            function startPairing() {
+                ATM.sendData('pairing-scan');
+            }
+        </script>
+        <div class="w3-center w3-display-middle">
+            <div>
+                <h2 class=" sm-margin-bottom head_unpaired_pair">Pair with remote server</h2>
+                <div class="text-content w3-center">
+                    <p class="d2 description_unpaired_scanqr"></p>
+                    <p class="tl2 no-margin-top description_unpaired_important"></p>
+                </div>
+            </div>
+            <div>
+                <button id="pairing-scan" onclick="startPairing();"
+                    class="unpaired-button w3-button w3-mobile withdrawal-hover">
+                    <div class="">Scan</div>
+                </button>
+                <p class="tl2 version-number"></p>
+            </div>
+        </div>
+    </section>
+    <section id="system-pairingerror-page" class="viewport pairing_error_state ImPage info system-color"
+        data-tr-section="pairing-error" data-screentype="system-tp">
+        <script>
+            function pairingErrorOk() {
+                ATM.showPage('#system-unpaired-page');
+            }
+        </script>
+
+        <header>
+        </header>
+        <div class="w3-center w3-display-middle">
+            <h2 class=" head_pairing_pairingfailed no-margin-bottom"></h2>
+            <p class=" description_pairing_error d2"></p>
+            <footer>
+                <button id="pairing-error-ok" onclick="pairingErrorOk()"
+                    class="btn_pairing_again pairingerror-button w3-button w3-mobile withdrawal-hover button"></button>
+            </footer>
+        </div>
+
+    </section>
+    <section id="system-pairingscan-page" class="viewport pairing_scan_state ImPage info system-color"
+        data-tr-section="pairing-scan" data-screentype="system-tp">
+        <script>
+            function pairingscanCancel() {
+                ATM.sendData('pairing-scan-cancel');
+            }
+        </script>
+        <header>
+        </header>
+        <div class="w3-center w3-display-middle">
+            <h2 class="head_pairingscan_pair no-margin-bottom"></h2>
+            <p class="description_pairingscan_scanqr d2"></p>
+            <footer>
+                <button id="pairing-scan-cancel" onclick="pairingscanCancel()"
+                    class="btn_pairingscan_cancel pairingscan-button w3-button w3-mobile withdrawal-hover button"></button>
+            </footer>
+        </div>
+
+    </section>
+    <section id="system-virgin-page" class="viewport virgin_state ImPage info system-color" data-tr-section="virgin"
+        data-screentype="system-tp">
+        <script>
+            function initializeATM() {
+                ATM.sendData('initialize');
+            }
+        </script>
+        <div class="w3-center w3-display-middle">
+            <header class="nm-margin-bottom">
+                <img src="images/logo_big.png" alt="" />
+            </header>
+            <h2 class="head_virgin_congratulations nm-margin-bottom"></h2>
+            <div class="text-content w3-center">
+                <p class="description_virgin_welcome d2"></p>
+                <p class="description_virgin_initialize tl2 no-margin-top "></p>
+            </div>
+            <footer>
+                <button id="initialize" onclick="initializeATM();"
+                    class="btn_virgin_initialize button virgin-button w3-button w3-mobile withdrawal-hover "></button>
+            </footer>
+        </div>
+    </section>
+    <section id="system-restart-page" class="viewport restart_state ImPage system-color" data-tr-section="restart"
+        data-screentype="system-tp">
+        <div class="w3-center w3-display-middle">
+            <img src="images/logo_small.png" />
+        </div>
+    </section>
+    <section id="system-maintenance-page" class="viewport maintenance_state ImPage info system-color"
+        data-tr-section="maintenance" data-screentype="system-tp info-contact-tp">
+        <div class="w3-center w3-display-middle">
+            <header class="xs-margin-bottom">
+                <img src="images/system/maintenance.svg" />
+            </header>
+            <div>
+                <h2 class=" head_maintenance_required xs-margin-bottom"></h2>
+                <p class=" description_maintenance_contactoperator d2"></p>
+                <div class="contacts nm-margin-top">
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="images/system/operator-amazonite.svg" />
+                                <span class="d2 operator-name"></span>
+                            </td>
+                            <td>
+                                <img src="images/system/phone-amazonite.svg" />
+                                <span class="d2 operator-phone"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="images/system/email-amazonite.svg" />
+                                <span class="d2 operator-email"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="system-depositenetworkdown-page" class="viewport depositNetworkDown_state ImPage info system-color"
+        data-tr-section="deposit-network-down" data-screentype="unaccounted-tp system-tp">
+        <script>
+            function networkdownOk(){
+                ATM.sendData('network-down-ok');
+            }
+        </script>
+        <div class="w3-center w3-display-middle">
+            <header class="xs-margin-bottom">
+                <img src="images/system/network-down.svg" />
+            </header>
+            <div>
+                <h2 class=" head_depositenetworkdown_networkdown no-margin-bottom"></h2>
+                <p class=" description_depositenetworkdown_downmoment d2"></p>
+                <p class=" description_depositenetworkdown_comback d2 no-margin-top"></p>
+            </div>
+            <footer>
+                <button id="network-down-ok" onclick="networkdownOk()"
+                    class="depositenetworkdown-button w3-button w3-mobile withdrawal-hover button ok">
+                    <div class=" btn_depositenetworkdown_ok"></div>
+                </button>
+            </footer>
+        </div>
+    </section>
+    <section id="system-wificonnecting-page" class="viewport wifi_connecting_state ImPage no-action-info system-color"
+        data-tr-section="wifi-connecting" data-screentype="wifi-tp system-tp">
+        <header>
+        </header>
+        <div class="w3-center w3-display-middle">
+            <h2 class=" head_wificonnecting_connecting no-margin-bottom"></h2>
+        </div>
+    </section>
+    <section id="system-disconnect-page" class="viewport ImPage no-action-info system-color"
+        data-tr-section="wifi-connecting" data-screentype="wifi-tp system-tp">
+
+        <div class="w3-center w3-display-middle">
+            <img src="./images/system/connectionerr.png">
+            <h2 class=" head_disconnect_fail no-margin-bottom top_margin"></h2>
+            <a href="#" onClick="reloadUI();" class="d1 no-margin-top bluecolor">
+                <strong class="text_disconnect_reload"></strong>
+            </a>
+        </div>
+    </section>
+    <section id="system-networkDown-page" class="networkDown_state viewport ImPage">
+        <div class="w3-center w3-display-middle">
+            <img src="images/system/network-down.svg" />
+            <h2 class="head_networkDown_networkdown top_margin"></h2>
+            <h3 class="description_networkDown_down"></h3>
+            <h3 class="description_networkDown_contact"></h3>
+        </div>
+    </section>
+
+    <script>
+        var smallLogos = document.querySelectorAll(".small_logo");
+
+        for (var i = 0; i < smallLogos.length; i++) {
+            smallLogos[i].addEventListener("click", function () {
+                ATM.showPage('#languages-page');
+            });
+        }
+    </script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>

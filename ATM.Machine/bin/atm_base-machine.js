@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+'use strict'
+
+Error.stackTraceLimit = 50
+
+// TODO: go through code and take out all evil throws
+require('../logging')
+
+var minimist = require('minimist')
+var Brain = require('../lib/brain')
+var Configuration = require('../config/configuration.js')
+
+var bailed = false
+var brain = null
+
+function bail (err) {
+  if (bailed) return
+  bailed = true
+  console.log('atm_base-machine bailing out momentarily...')
+  console.log(err)
+  if (err.stack) console.log(err.stack)
+  setTimeout(function () {
+    console.log('atm_base-machine bailing out')
+    process.exit(10)
+  }, 7000) // Leave some time to connect for browser to set error screen
+}
+
+function startBrain () {
+  
+  var commandLine = minimist(process.argv.slice(2))  
+  var config = Configuration.loadConfig(commandLine) 
+  brain = new Brain(config);                         
+  brain.on('error', bail);                           
+  brain.run();                                       
+  
+}
+
+process.on('uncaughtException', err => {
+  if (err.code === 'EPIPE') {      
+    if (brain) brain.epipeLog()    
+    console.trace(err)             
+    return                         
+  }                                
+  bail(err)                        
+})
+process.on('unhandledRejection', console.log)
+process.on('exit', function () { console.log('atm_base-machine exiting') })
+
+startBrain()

@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+    Layout = "_Login";
+}
+
+<div class="text-center">
+    <h1>ATM - Log In</h1>
+    <br />
+    <div>
+        <input type="text" id="txtUserName" class="input-login" />
+    </div>
+    <div>
+        <input type="password" id="txtPassword" class="input-login" />
+    </div>
+    <button class="btn btn-primary" onclick="doLogin()" value="Log In">Log In</button>
+    <script>
+        function doLogin() {
+
+            var u = document.getElementById('txtUserName').value;
+            var p = document.getElementById('txtPassword').value;
+
+            if (u.trim() === "" || p.trim() === "") {
+                return;
+            }
+
+            ajax.postData('/Account/DoLogIn',
+                {
+                    UserName: u,
+                    Password: p
+                },
+                function (data) {
+                    if (data.responseJson.isError === false) {
+                        window.location.href = "/";
+                    }
+                }
+            );
+        }
+    </script>
+</div>

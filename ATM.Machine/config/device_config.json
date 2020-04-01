@@ -1,0 +1,69 @@
+{
+  "atmModel": "ATM_BASE",
+  "brain": {
+    "freeMemRatio": 0.01,
+    "powerStatus": null,
+    "dataPath": "data",
+    "wifiConfigPath": null,
+    "nfcReader": null,
+    "wifiDisabled": true,
+    "mockCameraImage": "mock_data/compliance/license.jpg"
+  },
+  "kioskPrinter": {
+    "maker": "Zebra",
+    "model": "KR-403",
+    "protocol": "RS232",
+    "address": "/dev/ttyJ4"
+  },
+  "compliance": {
+    "paperWallet": false
+  },
+  "frontFacingCamera": {
+    "device": "/dev/video-front",
+    "facePhoto": {
+      "width": 1280,
+      "height": 720,
+      "threshold": 20,
+      "minFaceSize": 180
+    }
+  },
+  "scanner": {
+    "testNet": false,
+    "device": "/dev/video-scan",
+    "qr": {
+      "width": 640,
+      "height": 480
+    },
+    "photoId": {
+      "width": 1280,
+      "height": 720,
+      "threshold": 20,
+      "minFaceSize": 180
+    }
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "billValidator": {
+    "rs232": {
+      "device": "/dev/ttyJ5"
+    }
+  },
+  "billDispenser": {
+    "model": "f56",
+    "device": "/dev/ttyJ7"
+  },
+  "updater": {
+    "caFile": "/opt/certs/atm_base.pem",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "extractor": {
+      "atm_basePubKeyFile": "/opt/certs/atm_base.pub.key"
+    },
+    "packageJsonDir": "/opt/atm_base-machine"
+  },
+  "mockPair": "MH83AL7E-IPBE*Q0$7$JK0T80* TO16Y- CS70ML*YCXK75+TG9:-0JMOFFV1CKJK29CE8U9G/$H*LWD8:VIR*AAUDKJG5NYW:GV*97A6M",
+  "xx": "kyasfmvaqkcjmjbymajjtjjadlafxwzcxum7477SWFHCGZFVZ"
+}

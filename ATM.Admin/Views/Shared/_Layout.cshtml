@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ATM.Admin</title>
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="sidenav" id="sidebar">
+        <a asp-area="" asp-controller="Home" asp-action="Index">
+            ATM.Admin
+        </a>
+        &nbsp;
+        <button class="dropdown-btn">
+            Machines
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="/Machine/MachinesList?page=1">Machine list</a>
+            <a href="/Device/GetDevice?page=1">Device list</a>
+            <a asp-area="" asp-controller="Machine" asp-action="AddMachine">+Add Machine</a>
+        </div>
+        <button class="dropdown-btn">
+            Logs
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="/Log/GetLogs?page=1">Machine Log</a>
+            <a href="/Log/GetRequestLogs?page=1">Request Log</a>
+        </div>
+    </div>
+    <div id="wrapper">
+        @RenderBody()
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2019 - ATM.Admin
+            </div>
+        </footer>
+    </div>
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+</body>
+</html>

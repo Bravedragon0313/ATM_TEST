@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Add machine";
+}
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <main role="main" class="pb-3">
+                    <div>
+                        <h2 style="color:black; text-align:center !important" id="title">Generate ATM totem</h2>
+                        <div style="text-align:center">
+                            <label style="color:black !important">
+                                <input placeholder="machine name" size="50" style="margin-left: 1em;" type="text" id="machineName" name="machine name">
+                                <input type="button" id="pairing" class="btn btn-primary" value="Pair" onclick="generateTotem();">
+                            </label>
+                        </div>
+                        <img id="qrCode" style="display: none; max-height: 450px" alt="" />
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function generateTotem() {
+
+        var machineName = document.getElementById('machineName').value;
+
+        if (machineName.trim() === "") {
+            return;
+        }
+
+        document.getElementById('pairing').disabled = true;
+
+        ajax.getData('/Machine/CreateTotem',
+            {
+                name: machineName
+            },                     
+            function (responseData) {
+                if (responseData.responseJson.isError === false) {
+                    console.log("TOTEM :" + responseData.responseJson.message);
+                    showQrCode(responseData.responseJson.message);
+
+                } else {
+                    alert("Something went wrong");
+                }
+
+                document.getElementById('pairing').disabled = false;
+            }
+        );                         
+    }
+
+    function showQrCode(inputData) {
+        ajax.getData('/Qr/GenerateCodeForString',
+            {                       
+                input: inputData   
+            },
+            function (responseData) {
+                if (responseData.responseJson.isError === false) {
+                    console.log(responseData.responseJson);
+
+                    document.getElementById('qrCode').style.display = 'block';
+                    document.getElementById("qrCode").src = 'data:image/png;base64,' + responseData.responseJson.data.fileContents;
+
+                } else {
+                    document.getElementById('qrCode').style.display = 'none';
+                    alert("Something went wrong");
+                }
+            }
+        );
+    }
+</script>
+
+
+

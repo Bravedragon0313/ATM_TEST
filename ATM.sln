@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM.BL", "ATM.BL\ATM.BL.csproj", "{C1AD4702-1D3F-415F-B8B4-3D38A1F77244}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM.DAL", "ATM.DAL\ATM.DAL.csproj", "{A55C66F9-6F88-4AEE-A65C-EE38C67C2047}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM.Admin", "ATM.Admin\ATM.Admin.csproj", "{00FB477C-1B06-44ED-8EDD-3444CEF0B8B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM.Server", "ATM.Server\ATM.Server.csproj", "{71A49536-6E9E-4D27-802E-AB1D2F2B44D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM.RequestLog", "ATM.RequestLoging\ATM.RequestLog.csproj", "{9EAAA9F0-A30E-4A51-86B2-CF132ED8142C}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ATM.UI", "ATM.UI\", "{78D0478B-EF68-4483-AB2D-107485EB45DB}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49436"
+		Debug.AspNetCompiler.PhysicalPath = "ATM.UI\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49436\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49436"
+		Release.AspNetCompiler.PhysicalPath = "ATM.UI\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49436\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49436"
+		SlnRelativePath = "ATM.UI\"
+	EndProjectSection
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ATM.Machine", "ATM.Machine\ATM.Machine.njsproj", "{D0AF019A-9C84-4F76-9BD3-9FB95949A3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM.Utils", "ATM.Utils\ATM.Utils.csproj", "{C2996088-7160-4B7A-9C44-7C3065C6B6E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1AD4702-1D3F-415F-B8B4-3D38A1F77244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1AD4702-1D3F-415F-B8B4-3D38A1F77244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1AD4702-1D3F-415F-B8B4-3D38A1F77244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1AD4702-1D3F-415F-B8B4-3D38A1F77244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A55C66F9-6F88-4AEE-A65C-EE38C67C2047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A55C66F9-6F88-4AEE-A65C-EE38C67C2047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A55C66F9-6F88-4AEE-A65C-EE38C67C2047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A55C66F9-6F88-4AEE-A65C-EE38C67C2047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00FB477C-1B06-44ED-8EDD-3444CEF0B8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00FB477C-1B06-44ED-8EDD-3444CEF0B8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00FB477C-1B06-44ED-8EDD-3444CEF0B8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00FB477C-1B06-44ED-8EDD-3444CEF0B8B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A49536-6E9E-4D27-802E-AB1D2F2B44D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A49536-6E9E-4D27-802E-AB1D2F2B44D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A49536-6E9E-4D27-802E-AB1D2F2B44D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A49536-6E9E-4D27-802E-AB1D2F2B44D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EAAA9F0-A30E-4A51-86B2-CF132ED8142C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EAAA9F0-A30E-4A51-86B2-CF132ED8142C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EAAA9F0-A30E-4A51-86B2-CF132ED8142C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EAAA9F0-A30E-4A51-86B2-CF132ED8142C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D0478B-EF68-4483-AB2D-107485EB45DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D0478B-EF68-4483-AB2D-107485EB45DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D0478B-EF68-4483-AB2D-107485EB45DB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D0478B-EF68-4483-AB2D-107485EB45DB}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{D0AF019A-9C84-4F76-9BD3-9FB95949A3B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0AF019A-9C84-4F76-9BD3-9FB95949A3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0AF019A-9C84-4F76-9BD3-9FB95949A3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0AF019A-9C84-4F76-9BD3-9FB95949A3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2996088-7160-4B7A-9C44-7C3065C6B6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2996088-7160-4B7A-9C44-7C3065C6B6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2996088-7160-4B7A-9C44-7C3065C6B6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2996088-7160-4B7A-9C44-7C3065C6B6E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEBF1030-B433-4EA8-9E92-01A5121E6E18}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{d0af019a-9c84-4f76-9bd3-9fb95949a3b4}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>bin\atm_base-machine</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <ScriptArguments>--mockCam</ScriptArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="bin\atm_base-machine.js" />
+    <Content Include="bin\fob.js" />
+    <Content Include="bin\font_face.js" />
+    <Content Include="build\config.gypi" />
+    <Content Include="config\configuration.js" />
+    <Content Include="config\device_config.json" />
+    <Content Include="config\device_config.sample.json" />
+    <Content Include="config\software_config.json" />
+    <Content Include="hardware\codebase\atm_base\device_config.json" />
+    <Content Include="jsconfig.json" />
+    <Content Include="lib\upboard\atm_base\board-manager.js" />
+    <Content Include="utils\manual_update\manual_update.txt" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="INSTALL-NIX.md" />
+    <Content Include="INSTALL.md" />
+    <Content Include="logging.js" />
+    <Content Include="utils\manual_update\manual_update.js" />
+    <Content Include="watchdog.js" />
+    <Content Include="utils\benchmarks\bill-math-make-change.js" />
+    <Content Include="bin\cam.js" />
+    <Content Include="bin\check-bills-f56.js" />
+    <Content Include="bin\decode-jpeg.js" />
+    <Content Include="bin\dispense-f56.js" />
+    <Content Include="bin\dispense-init-f56.js" />
+    <Content Include="bin\dispense-init.js" />
+    <Content Include="bin\dispense.js" />
+    <Content Include="bin\door.js" />
+    <Content Include="bin\doorm.js" />
+    <Content Include="bin\douro-light-on.js" />
+    <Content Include="bin\fake-bills.js" />
+    <Content Include="bin\init-bv.js" />
+    <Content Include="bin\mock.js" />
+    <Content Include="bin\mock_dispense.js" />
+    <Content Include="bin\monitor-door.js" />
+    <Content Include="bin\pair.js" />
+    <Content Include="bin\parse-qr.js" />
+    <Content Include="bin\parse_pdf.js" />
+    <Content Include="bin\scan-pdf.js" />
+    <Content Include="bin\setbill.js" />
+    <Content Include="bin\token-gen.js" />
+    <Content Include="bin\unlock-door.js" />
+    <Content Include="bin\usbreset.js" />
+    <Content Include="deploy\build.js" />
+    <Content Include="deploy\package-native.js" />
+    <Content Include="deploy\packages.js" />
+    <Content Include="deploy\password_line.js" />
+    <Content Include="deploy\remove-modules.js" />
+    <Content Include="deploy\report.js" />
+    <Content Include="lib\action-emitter.js" />
+    <Content Include="lib\billdispenser.js" />
+    <Content Include="lib\bill_math.js" />
+    <Content Include="lib\bn.js" />
+    <Content Include="lib\brain.js" />
+    <Content Include="lib\browser.js" />
+    <Content Include="lib\compliance-tiers.js" />
+    <Content Include="lib\configuration.js" />
+    <Content Include="lib\data-path.js" />
+    <Content Include="lib\db.js" />
+    <Content Include="lib\dispense-optimizer.js" />
+    <Content Include="lib\door.js" />
+    <Content Include="lib\error.js" />
+    <Content Include="lib\kioskPrinter.js" />
+    <Content Include="lib\logs.js" />
+    <Content Include="lib\openssl-keygen.js" />
+    <Content Include="lib\operator-info.js" />
+    <Content Include="lib\pairing.js" />
+    <Content Include="lib\pp.js" />
+    <Content Include="lib\reaper.js" />
+    <Content Include="lib\request.js" />
+    <Content Include="lib\scanner.js" />
+    <Content Include="lib\self_sign.js" />
+    <Content Include="lib\trader.js" />
+    <Content Include="lib\tx.js" />
+    <Content Include="lib\usbreset.js" />
+    <Content Include="lib\wifi-none.js" />
+    <Content Include="lib\wifi.js" />
+    <Content Include="lib\wpacli.js" />
+    <Content Include="lib\zpl-helper.js" />
+    <Content Include="utils\securecard\securecard.js" />
+    <Content Include="utils\test\stress-test\init-cert.js" />
+    <Content Include="utils\test\stress-test\save-config.js" />
+    <Content Include="utils\tools\bills-present.js" />
+    <Content Include="utils\tools\cam-bench.js" />
+    <Content Include="utils\tools\door-test.js" />
+    <Content Include="utils\tools\f56-host-rs232.js" />
+    <Content Include="utils\tools\fob.js" />
+    <Content Include="utils\tools\io.js" />
+    <Content Include="utils\tools\led-color.js" />
+    <Content Include="utils\tools\led-test.js" />
+    <Content Include="utils\tools\light.js" />
+    <Content Include="utils\tools\list-cam-formats.js" />
+    <Content Include="utils\tools\mifare.js" />
+    <Content Include="utils\tools\nfc-test.js" />
+    <Content Include="utils\tools\nipponPrinterTests.js" />
+    <Content Include="utils\tools\reset_puloon.js" />
+    <Content Include="utils\tools\scan-qr.js" />
+    <Content Include="utils\tools\scanbaylights.js" />
+    <Content Include="utils\tools\simple-door-test.js" />
+    <Content Include="utils\tools\siren.js" />
+    <Content Include="utils\tools\test-bv.js" />
+    <Content Include="utils\wip\card-dispenser.js" />
+    <Content Include="utils\deploy\aaeon_version\updateinit.js" />
+    <Content Include="deploy\bb-debs\updatescript.js" />
+    <Content Include="deploy\bb-debs-ssuboard\updatescript.js" />
+    <Content Include="deploy\cc-watchdog\updatescript.js" />
+    <Content Include="deploy\codebase\updateinit-aaeon.js" />
+    <Content Include="deploy\codebase\updateinit.js" />
+    <Content Include="deploy\commands\reboot.js" />
+    <Content Include="deploy\commands\show_log.js" />
+    <Content Include="deploy\commands\show_ps.js" />
+    <Content Include="deploy\commands\show_update_log.js" />
+    <Content Include="deploy\commands\uninit.js" />
+    <Content Include="deploy\commands\unpair.js" />
+    <Content Include="deploy\fonts\updateinit.js" />
+    <Content Include="deploy\nodejs\updatenode.js" />
+    <Content Include="deploy\purge-logs\updatescript.js" />
+    <Content Include="deploy\reboot-uni\updatescript.js" />
+    <Content Include="deploy\show_log\updatescript.js" />
+    <Content Include="deploy\system\updateinit-aaeon.js" />
+    <Content Include="deploy\system\updateinit.js" />
+    <Content Include="deploy\watchdog\updateinit.js" />
+    <Content Include="hardware\codebase\aaeon\device_config.json" />
+    <Content Include="hardware\codebase\N7G1\device_config.json" />
+    <Content Include="hardware\codebase\ssuboard\device_config.json" />
+    <Content Include="hardware\codebase\upboard\sintra\device_config.json" />
+    <Content Include="hardware\system\ssuboard\scripts.txt" />
+    <Content Include="lib\ccnet\ccnet-emulator.js" />
+    <Content Include="lib\ccnet\ccnet-rs232.js" />
+    <Content Include="lib\ccnet\ccnet.js" />
+    <Content Include="lib\ccnet\consts.js" />
+    <Content Include="lib\ccnet\states-fsm.js" />
+    <Content Include="lib\ccnet\transmission-fsm.js" />
+    <Content Include="lib\coins\utils.js" />
+    <Content Include="lib\coins\auc.js" />
+    <Content Include="lib\compliance\id_verify.js" />
+    <Content Include="lib\compliance\parsepdf417-us.js" />
+    <Content Include="lib\compliance\parsepdf417-za.js" />
+    <Content Include="lib\compliance\parsepdf417.js" />
+    <Content Include="lib\f56\bills.js" />
+    <Content Include="lib\f56\f56-dispenser.js" />
+    <Content Include="lib\f56\f56-dlevel-fsm.js" />
+    <Content Include="lib\f56\f56-fsm.js" />
+    <Content Include="lib\f56\f56-rs232.js" />
+    <Content Include="lib\flows\facephoto.js" />
+    <Content Include="lib\flows\id-card-data.js" />
+    <Content Include="lib\flows\id-card-photo.js" />
+    <Content Include="lib\flows\sanctions.js" />
+    <Content Include="lib\flows\sms.js" />
+    <Content Include="lib\id003\crc.js" />
+    <Content Include="lib\id003\id003.js" />
+    <Content Include="lib\id003\id003fsm.js" />
+    <Content Include="lib\id003\id003rs232.js" />
+    <Content Include="lib\intrusion\sensing.js" />
+    <Content Include="lib\leds\led-control.js" />
+    <Content Include="lib\leds\leds.js" />
+    <Content Include="lib\leds\opc.js" />
+    <Content Include="lib\mei\cashflow_sc.js" />
+    <Content Include="lib\mei\denominations.js" />
+    <Content Include="lib\mocks\billdispenser.js" />
+    <Content Include="lib\mocks\camera-wrapper.js" />
+    <Content Include="lib\mocks\id003.js" />
+    <Content Include="lib\mocks\kioskPrinter.js" />
+    <Content Include="lib\mocks\pdf417.js" />
+    <Content Include="lib\mocks\scanner.js" />
+    <Content Include="lib\mocks\trader.js" />
+    <Content Include="lib\mocks\video.js" />
+    <Content Include="lib\mocks\wifi.js" />
+    <Content Include="lib\puloon\notes.txt" />
+    <Content Include="lib\puloon\puloon-dispenser.js" />
+    <Content Include="lib\puloon\puloonrs232.js" />
+    <Content Include="lib\puloon\puloon_data.js" />
+    <Content Include="lib\ssuboard\board-manager.js" />
+    <Content Include="lib\ssuboard\door-manager.js" />
+    <Content Include="lib\ssuboard\fob-manager.js" />
+    <Content Include="lib\ssuboard\io.js" />
+    <Content Include="lib\ssuboard\led-addresses.js" />
+    <Content Include="lib\ssuboard\led-manager.js" />
+    <Content Include="lib\ssuboard\led-sm.js" />
+    <Content Include="lib\ssuboard\leds.js" />
+    <Content Include="lib\ssuboard\mifare.js" />
+    <Content Include="lib\ssuboard\nfc.js" />
+    <Content Include="lib\ssuboard\process-door.js" />
+    <Content Include="lib\ssuboard\siren-manager.js" />
+    <Content Include="lib\ssuboard\u2f.js" />
+    <Content Include="lib\update\extractor.js" />
+    <Content Include="lib\update\updater.js" />
+    <Content Include="lib\coins\validators\index.js" />
+    <Content Include="lib\id003\contrib\javascriptstatemachine.js" />
+    <Content Include="lib\ssuboard\mock\board-manager.js" />
+    <Content Include="lib\ssuboard\mock\io.js" />
+    <Content Include="lib\ssuboard\mock\led-control.js" />
+    <Content Include="lib\ssuboard\mock\led-manager.js" />
+    <Content Include="lib\upboard\gaia\board-manager.js" />
+    <Content Include="lib\upboard\gaia\led-addresses.js" />
+    <Content Include="lib\upboard\gaia\led-manager.js" />
+    <Content Include="lib\upboard\sintra\board-manager.js" />
+    <Content Include="utils\mock_data\compliance\license.jpg" />
+    <Content Include="utils\test\unit\mock-billdispenser.js" />
+    <Content Include="utils\test\unit\test-bill-math-make-change.js" />
+    <Content Include="utils\test\unit\test-fob-add-remove.js" />
+    <Content Include="utils\test\unit\test-led-manager.js" />
+    <Content Include="utils\test\unit\test-optimize-batch.js" />
+    <Content Include="utils\test\unit\test-tx-add-bill.js" />
+    <Content Include="utils\test\unit\test-tx-add-cash.js" />
+    <Content Include="utils\test\unit\test-tx-compute-cash-out.js" />
+    <Content Include="utils\test\unit\test-tx-eq.js" />
+    <Content Include="utils\test\unit\test-tx-update.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\log\" />
+    <Folder Include="deploy\" />
+    <Folder Include="utils\benchmarks\" />
+    <Folder Include="bin" />
+    <Folder Include="build\" />
+    <Folder Include="config\" />
+    <Folder Include="data" />
+    <Folder Include="utils\deploy\" />
+    <Folder Include="utils\deploy\aaeon_version\" />
+    <Folder Include="deploy\bb-debs" />
+    <Folder Include="deploy\bb-debs-ssuboard" />
+    <Folder Include="deploy\cc-watchdog" />
+    <Folder Include="deploy\codebase" />
+    <Folder Include="deploy\commands" />
+    <Folder Include="deploy\fonts" />
+    <Folder Include="deploy\nodejs" />
+    <Folder Include="deploy\purge-logs" />
+    <Folder Include="deploy\reboot-uni" />
+    <Folder Include="deploy\show_log" />
+    <Folder Include="deploy\system" />
+    <Folder Include="deploy\watchdog" />
+    <Folder Include="utils\exec\" />
+    <Folder Include="hardware" />
+    <Folder Include="hardware\codebase" />
+    <Folder Include="hardware\codebase\aaeon" />
+    <Folder Include="hardware\codebase\aaeon\bin" />
+    <Folder Include="hardware\codebase\atm_base\" />
+    <Folder Include="hardware\codebase\N7G1" />
+    <Folder Include="hardware\codebase\N7G1\bin" />
+    <Folder Include="hardware\codebase\N7G1\sys" />
+    <Folder Include="hardware\codebase\ssuboard" />
+    <Folder Include="hardware\codebase\upboard" />
+    <Folder Include="hardware\codebase\upboard\sintra" />
+    <Folder Include="hardware\system" />
+    <Folder Include="hardware\system\aaeon" />
+    <Folder Include="hardware\system\N7G1" />
+    <Folder Include="hardware\system\ssuboard" />
+    <Folder Include="hardware\system\ssuboard\supervisor" />
+    <Folder Include="hardware\system\ssuboard\supervisor\conf.d" />
+    <Folder Include="hardware\system\ssuboard\udev" />
+    <Folder Include="hardware\system\upboard" />
+    <Folder Include="hardware\system\upboard\gaia" />
+    <Folder Include="hardware\system\upboard\gaia\supervisor" />
+    <Folder Include="hardware\system\upboard\gaia\supervisor\conf.d" />
+    <Folder Include="hardware\system\upboard\gaia\supervisor\udev" />
+    <Folder Include="hardware\system\upboard\sintra" />
+    <Folder Include="hardware\system\upboard\sintra\supervisor" />
+    <Folder Include="hardware\system\upboard\sintra\supervisor\conf.d" />
+    <Folder Include="hardware\system\upboard\sintra\udev" />
+    <Folder Include="lib" />
+    <Folder Include="lib\ccnet" />
+    <Folder Include="lib\coins" />
+    <Folder Include="lib\coins\validators" />
+    <Folder Include="lib\compliance" />
+    <Folder Include="lib\f56" />
+    <Folder Include="lib\flows" />
+    <Folder Include="lib\id003" />
+    <Folder Include="lib\id003\contrib" />
+    <Folder Include="lib\intrusion" />
+    <Folder Include="lib\leds" />
+    <Folder Include="lib\mei" />
+    <Folder Include="lib\mocks" />
+    <Folder Include="lib\puloon" />
+    <Folder Include="lib\ssuboard" />
+    <Folder Include="lib\ssuboard\mock" />
+    <Folder Include="lib\upboard" />
+    <Folder Include="lib\upboard\atm_base\" />
+    <Folder Include="lib\upboard\gaia" />
+    <Folder Include="lib\upboard\sintra" />
+    <Folder Include="lib\update" />
+    <Folder Include="utils\mock_data\" />
+    <Folder Include="utils\mock_data\compliance\" />
+    <Folder Include="utils\manual_update\" />
+    <Folder Include="utils\securecard\" />
+    <Folder Include="utils\test\stress-test\" />
+    <Folder Include="utils\test\" />
+    <Folder Include="utils\test\unit\" />
+    <Folder Include="utils\tools\" />
+    <Folder Include="utils\" />
+    <Folder Include="utils\wip\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Machines list";
+}
+
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <main role="main" class="pb-3">
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Machine Name</th>
+                                <th scope="col">Totem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var machine in ViewBag.MachinesList.Results)
+                            {
+                                <tr>
+                                    <td>@machine.Id</td>
+                                    <td>@machine.Name</td>
+                                    <td>@machine.Token</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <div class="dataTables_paginate paging_full_numbers" id="log_filter_paginate">
+        @if (ViewBag.MachinesList.RowCount % 10 == 0)
+        {
+            @for (int i = 1; i <= ViewBag.MachinesList.RowCount / 10; i++)
+            {
+                <a value="@i" class="btn btn-light" onclick="machinePagination(@i)">@i</a>
+                <p class="page">@ViewBag.page page</p>
+            }
+        }
+        @if (ViewBag.MachinesList.RowCount % 10 != 0)
+        {
+            @for (int i = 1; i <= ViewBag.MachinesList.RowCount / 10 + 1; i++)
+            {
+                <a value="@i" class="btn btn-light" onclick="machinePagination(@i)">@i</a>
+                <p class="page">@ViewBag.page page</p>
+            }
+        }
+
+    </div>
+</div>
+<script>
+    function machinePagination(page) {
+        window.location.href = "/Machine/MachinesList?page=" + page;
+    }
+</script>
+
+
+
+
+

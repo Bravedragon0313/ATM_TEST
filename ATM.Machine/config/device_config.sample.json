@@ -1,0 +1,36 @@
+{
+  "brain": {
+    "freeMemRatio": 0.01,
+    "powerStatus": null,
+    "dataPath": "data",
+    "wifiConfigPath": null,
+    "mockCryptoQR": {},
+    "mockCameraImage": "mock_data/compliance/license.jpg"
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "billValidator": {
+    "rs232": {
+      "device": null
+    }
+  },
+  "billDispenser": {
+    "device": null,
+    "_mockedBalance": {
+      "cassettes": [
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        }
+      ]
+    },
+    "_mockedError": {
+      "0x51": [0, 4]
+    }
+  }
+}

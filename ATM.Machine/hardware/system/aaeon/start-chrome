@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/chromium-browser --touch-events=enabled --disable-pinch --incognito --kiosk file:///opt/apps/machine/atm_base-machine/ui/start.html

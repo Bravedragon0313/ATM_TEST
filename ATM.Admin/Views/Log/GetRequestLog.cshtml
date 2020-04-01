@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Request logs";
+}
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <main role="main" class="pb-3">
+                    <p class="loghead">Request Logs</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ResponseMillis</th>
+                                <th scope="col">StatusCode</th>
+                                <th scope="col">Method</th>
+                                <th scope="col">AuthorizedUser</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var requestlog in ViewBag.RequestLogsList.Results)
+                            {
+                                <tr>
+                                    <td>@requestlog.ResponseMillis</td>
+                                    <td>@requestlog.StatusCode</td>
+                                    <td>@requestlog.Method</td>
+                                    <td>@requestlog.AuthorizedUser</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </main>
+            </div>
+        </div>
+    </div>
+    <div class="dataTables_paginate paging_full_numbers logpadding">
+        @if (ViewBag.RequestLogsList.RowCount % 10 == 0)
+        {
+            @for (int i = 1; i <= ViewBag.RequestLogsList.RowCount / 10; i++)
+            {
+                <a value="@i" class="btn btn-light" onclick="requestLogPagination(@i)">@i</a>
+                <p class="page">@ViewBag.Page page</p>
+            }
+        }
+        @if (ViewBag.RequestLogsList.RowCount % 10 != 0)
+        {
+            @for (int i = 1; i <= ViewBag.RequestLogsList.RowCount / 10 + 1; i++)
+            {
+                <a value="@i" class="btn btn-light" onclick="requestLogPagination(@i)">@i</a>
+                <div>
+                    <p class="page">@ViewBag.Page page</p>
+                </div>
+
+            }
+        }
+
+    </div>
+</div>
+<script>
+    function requestLogPagination(page) {
+        window.location.href = "/Log/GetRequestLogs?page=" + page;
+    }
+</script>
+
+
+
+
+
+
+
+
